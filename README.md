@@ -1,3 +1,7 @@
+# Project Structure
+
+![alt text](solution-files/Diagram.png)
+
 # How to run
 
 Run docker compose up within project directory.
