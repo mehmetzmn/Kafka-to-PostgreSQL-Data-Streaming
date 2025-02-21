@@ -1,6 +1,6 @@
 # Project Structure
 
-![alt text](solution-files/Diagram.png)
+<img src="solution-files/Diagram.png" width="500">
 
 # How to run
 
