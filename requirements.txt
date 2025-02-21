@@ -1,0 +1,11 @@
+kafka-python
+pandas
+pyarrow
+fastparquet
+pymongo
+psycopg2-binary
+sqlalchemy
+python-dotenv
+tqdm
+pytest
+pytest-mock
