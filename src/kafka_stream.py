@@ -10,7 +10,7 @@ from tqdm import tqdm
 # Read parquet file
 
 
-def read_parquet_data(file_path="measurements.parquet"):
+def read_parquet_data(file_path="./data/measurements.parquet"):
     try:
         df = pd.read_parquet(file_path)
         num_records = df.shape[0]

@@ -97,6 +97,7 @@ services:
         condition: service_completed_successfully
     volumes:
       - .:/app
+    #command: python /app/src/main.py
     networks:
       - kafka-network
 
