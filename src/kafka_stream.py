@@ -55,7 +55,11 @@ def kafka_stream():
             bootstrap_servers=["kafka:29092"],
             auto_offset_reset="earliest",
             value_deserializer=lambda v: json.loads(v.decode("utf-8")),
-            consumer_timeout_ms=5000
+            consumer_timeout_ms=5000,
+            fetch_min_bytes=1024 * 1024,  # 1MB minimum fetch
+            max_poll_records=5000,  # Increase records per poll
+            session_timeout_ms=30000,
+            heartbeat_interval_ms=10000
         )
 
         print("Initializing Kafka producer...", flush=True)
@@ -86,15 +90,22 @@ def kafka_stream():
 
         # Consumer phase with tqdm
         print(f"\nConsumer Phase - Starting at {datetime.now()}", flush=True)
-        message_count = 0
+        batch_size = 1000
+        batch = []
         with tqdm(total=total_records, desc="Consuming messages") as pbar:
             for message in consumer:
-                collection.insert_one(message.value)
-                message_count += 1
-                pbar.update(1)
+                batch.append(message.value)
+                if len(batch) >= batch_size:
+                    collection.insert_many(batch, ordered=False)
+                    pbar.update(len(batch))
+                    batch = []
+
+            # Insert remaining documents
+            if batch:
+                collection.insert_many(batch, ordered=False)
+                pbar.update(len(batch))
 
         print(f"\nProcessing completed at {datetime.now()}", flush=True)
-        print(f"Total messages processed: {message_count}", flush=True)
 
     except Exception as e:
         print(f"\nAn error occurred at {datetime.now()}: {str(e)}", flush=True)

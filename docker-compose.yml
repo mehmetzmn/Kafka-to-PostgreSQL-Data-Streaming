@@ -12,6 +12,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  #    mem_limit: 5g
+  #    cpus: 4.0
 
   kafka:
     # image: confluentinc/cp-kafka:5.0.0
@@ -38,6 +40,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  #    mem_limit: 5g
+  #    cpus: 4.0
 
   kafka-setup:
     image: confluentinc/cp-kafka:7.3.0
@@ -100,6 +104,8 @@ services:
     #command: python /app/src/main.py
     networks:
       - kafka-network
+#    mem_limit: 5g
+#    cpus: 4.0
 
 volumes:
   sensor-data:
