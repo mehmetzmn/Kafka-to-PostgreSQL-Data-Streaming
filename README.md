@@ -1,3 +1,7 @@
+# About Project
+
+This is a simple project that demonstrates streaming and batch processing using Apache Kafka, MongoDB, Pandas and PostgreSQL, containerized with Docker. As shown in the project structure below, first, a parquet file is streamed with Kafka and written to the MongoDB database. From there, the data is processed with Pandas and written into a PostgreSQL database.
+
 # Project Structure
 
 <img src="solution-files/Diagram.png" width="500">
